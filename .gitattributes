@@ -1,0 +1,2 @@
+# Set the default `end of line` behavior, in case contributor does not have core.autocrlf set. This setting should be in sync with .editorconfig
+* text eol=lf
