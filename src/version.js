@@ -2,6 +2,7 @@
 
 import path from 'path';
 import moment from 'moment';
+import semver from 'semver';
 import username from 'username';
 import readPkgUp from 'read-pkg-up';
 import repo from './repo';
@@ -29,7 +30,7 @@ const semverMoment = () => {
 const pkgVersion = async(o) => {
     const data = await readPkgUp({cwd: o.cwd});
     if (data && data.pkg && data.pkg.version) {
-        return data.pkg.version;
+        return semver.valid(data.pkg.version);
     }
     throw new TypeError('Could not read a valid version from: ' + data.path
         ? path.relative('', data.path)
@@ -62,9 +63,9 @@ const suffix = async(version, option) => {
     return version + prefix + buildmeta.join(fieldSeparator);
 };
 
-const getRevision = async(cwd) => {
-    const version = await pkgVersion({cwd});
-    const revision = await suffix(version, {cwd});
+const getRevision = async(option) => {
+    const version = await pkgVersion(option);
+    const revision = await suffix(version, option);
 
     return revision;
 };
@@ -72,7 +73,7 @@ const getRevision = async(cwd) => {
 const version = async(o) => {
     const option = Object.assign({}, o);
     const cwd = path.resolve(option.cwd || '');
-    const revision = await getRevision(cwd);
+    const revision = await getRevision(option);
 
     return revision;
 };
