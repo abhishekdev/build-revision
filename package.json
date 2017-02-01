@@ -1,7 +1,7 @@
 {
   "name": "build-revision",
-  "version": "0.1.0-pre",
-  "description": "Generate a version number for your continuous build",
+  "version": "0.1.0",
+  "description": "Generate semver compatible version to uniquely identify project build using build metadata",
   "main": "index.js",
   "license": "MIT",
   "author": {
