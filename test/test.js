@@ -1,3 +1,4 @@
+import fs from 'fs';
 import test from 'ava';
 import semver from 'semver';
 import moment from 'moment';
@@ -52,9 +53,20 @@ test('generates ISO 8601 UTC timestamp for dirty builds', async t => {
         cwd: 'test/fixture/package-valid/target'
     };
 
+    // Test Setup: Add a file to the fixtures direcory to make the repository it dirty
+    fs.writeFileSync('test/fixture/package-valid/change.txt', 'dummychange');
+
     const revision = await buildRevision(option);
-    const timestamp = revision.split('.').pop(); // get the last part
+    const timestamp = revision.split('.').pop();
     t.true(moment(timestamp).isValid(), 'could not parse a valid timestamp');
+
+    // Test Teardown: Reset repository
+    fs.unlink('test/fixture/package-valid/change.txt', (err) => {
+        if (err) {
+            t.fail('Could not reset test setup, other tests might be affected')
+            throw err;
+        }
+    });
 });
 
 test.todo('throws error when project is not a git clone');
