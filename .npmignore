@@ -1,3 +1,12 @@
+## Ignore source code for published code
+src
+test
+
+## Ignore project configuration files
+.babelrc
+.editorconfig
+.git*
+
 # IDE generated files and directories
 .project
 .vs
@@ -8,9 +17,6 @@ nbproject
 logs
 *.log
 npm-debug.log*
-
-# Generated code
-dist
 
 # Runtime data
 pids
