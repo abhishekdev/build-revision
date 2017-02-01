@@ -1,6 +1,7 @@
 # build-revision
 
 [![Build Status](https://travis-ci.org/abhishekdev/build-revision.svg?branch=master)](https://travis-ci.org/abhishekdev/build-revision)
+[![Coverage Status](https://coveralls.io/repos/github/abhishekdev/build-revision/badge.svg)](https://coveralls.io/github/abhishekdev/build-revision)
 
 Generate a semver compatible version number for your continuous builds which includes [build metadata](http://semver.org/#spec-item-10)
 
@@ -11,6 +12,7 @@ Generate a semver compatible version number for your continuous builds which inc
 ```sh
 $ npm install --save-dev build-revision
 ```
+
 ### Example
 
 #### ES5
@@ -37,14 +39,19 @@ const fn = aync() => {
 ## API
 
 ### buildRevision(options)
+
 - Appends `prefix.githash` to the version for a repo with no local changes
+
   * 0.1.0 => 0.1.0+SHA.01234567
   * 0.1.0-pre => 0.1.0-pre+SHA.01234567
   * 0.1.0-pre+SHA.01234567 => 0.1.0-pre+SHA.01234567
+
 - Appends `prefix.githash.username.timestamp` to the version for repo with local changes
+
   * 0.1.0 => 0.1.0+SHA.01234567.currentuser.20170101T000000Z
   * 0.1.0-pre => 0.1.0+SHA.01234567.currentuser.20170101T000000Z
   * 0.1.0-pre+SHA.01234567 => 0.1.0+SHA.01234567.currentuser.20170101T000000Z
+
 - The timestamp is a ISO 8601 UTC string
 
 ```
@@ -56,7 +63,6 @@ Throws: Error
 Returns:
   - semver compatible version with a build metadata part
 ```
-
 
 ### Options
 
