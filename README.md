@@ -59,6 +59,7 @@ Version                | Build Version
 
 ### buildRevision(options)
 
+- Appends `prefix.username.timestamp` to the version if repository does not exists
 - Appends `prefix.githash.username.timestamp` to the version for a git repository with local changes
 - Appends `prefix.githash` to the version for a git repository with no local changes
 

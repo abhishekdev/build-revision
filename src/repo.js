@@ -30,7 +30,20 @@ const git__getHash = async(option) => {
     throw new Error('Could not find Git SHA');
 };
 
+const git__exists = async(option) => {
+    let isGit = true;
+
+    try {
+        await git('rev-parse', option);
+    } catch (e) {
+        isGit = false;
+    }
+
+    return isGit;
+};
+
 export default {
+    exists: git__exists,
     isDirty: git__isDirty,
     hash: git__getHash
 }
