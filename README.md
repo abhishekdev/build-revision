@@ -1,6 +1,8 @@
 # build-revision
 
-[![Build Status](https://travis-ci.org/abhishekdev/build-revision.svg?branch=master)](https://travis-ci.org/abhishekdev/build-revision) [![Coverage Status](https://coveralls.io/repos/github/abhishekdev/build-revision/badge.svg?branch=master)](https://coveralls.io/github/abhishekdev/build-revision?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/abhishekdev/build-revision/badge.svg)](https://coveralls.io/github/abhishekdev/build-revision)
+[![Build status](https://ci.appveyor.com/api/projects/status/87rwahlhtj1903ag?svg=true)](https://ci.appveyor.com/project/abhishekdev/build-revision)
+[![Build Status](https://travis-ci.org/abhishekdev/build-revision.svg)](https://travis-ci.org/abhishekdev/build-revision)
 
 Generate semver compatible version to uniquely identify project build using [build metadata](http://semver.org/#spec-item-10)
 
