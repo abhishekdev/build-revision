@@ -42,7 +42,7 @@ const fn = aync() => {
 ### Working copy has no changes (_CI/CD Tools_)
 
 Version                | Build Version
----------------------- | ----------------------
+:--------------------- | :---------------------
 0.1.0                  | 0.1.0+SHA.abcd123
 0.1.0-pre              | 0.1.0-pre+SHA.abcd123
 0.1.0-pre+SHA.01234567 | 0.1.0-pre+SHA.01234567
@@ -50,7 +50,7 @@ Version                | Build Version
 ### Working copy has no changes (_Developer Machine_)
 
 Version                | Build Version
----------------------- | ---------------------------------------------------
+:--------------------- | :--------------------------------------------------
 0.1.0                  | 0.1.0+SHA.abcd123.currentuser.20170101T000000Z
 0.1.0-pre              | 0.1.0-pre+SHA.abcd123.currentuser.20170101T000000Z
 0.1.0-pre+SHA.01234567 | 0.1.0-pre+SHA.01234567.currentuser.20170101T000000Z
@@ -59,9 +59,10 @@ Version                | Build Version
 
 ### buildRevision(options)
 
-- Appends `prefix.githash` to the version for a repo with no local changes
-- Appends `prefix.githash.username.timestamp` to the version for repo with local changes
-- The timestamp is a ISO 8601 UTC string
+- Appends `prefix.githash.username.timestamp` to the version for a git repository with local changes
+- Appends `prefix.githash` to the version for a git repository with no local changes
+
+>  The timestamp is a ISO 8601 UTC string
 
 ```
 Type: Promise
