@@ -27,7 +27,7 @@ test('throws error for package with missing version', async t => {
 });
 
 test('buildinfo prefix is configurable', async t => {
-    const PREFIX = 'REV'
+    const PREFIX = 'REV';
     const option = {
         prefix: PREFIX,
         cwd: 'test/fixture/package-valid/target'
@@ -53,7 +53,7 @@ test('generates ISO 8601 UTC timestamp for dirty builds', async t => {
         cwd: 'test/fixture/package-valid/target'
     };
 
-    // Test Setup: Add a file to the fixtures direcory to make the repository it dirty
+    // Test Setup: Emulate a dirty repository by adding a file to the fixtures directory
     fs.writeFileSync('test/fixture/package-valid/change.txt', 'dummychange');
 
     const revision = await buildRevision(option);
