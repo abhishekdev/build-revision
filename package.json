@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/abhishekdev/build-revision#readme",
   "scripts": {
-    "build": "babel src -d dist",
+    "build": "babel src -d dist --source-maps",
     "prepublish": "npm run build",
-    "test": "nyc ava"
+    "test": "nyc --reporter=html --reporter=text ava",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [
     "build",

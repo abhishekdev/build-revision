@@ -1,6 +1,7 @@
 ## Ignore source code for published code
 src
 test
+dist/*.map
 
 ## Ignore project configuration files
 .babelrc
