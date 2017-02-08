@@ -37,35 +37,43 @@ const pkgVersion = async(o) => {
         : 'package.json');
 };
 
-// Help identify dirty builds, those that differ from the latest commit.
-// If the working directory is dirty, append the username and date to
-// the version string, to make it stand out.
-const suffix = async(version, option) => {
-    const startMarker = '+';
-    const fieldSeparator = '.';
-    const prefix = version.includes(startMarker)
-        ? fieldSeparator
-        : startMarker;
-    const dirty = await repo.isDirty(option);
-    const hash = await repo.hash(option);
-    let buildmeta = [
-        option.prefix || 'SHA',
-        hash
-    ];
+// Identify dirty builds, those that differ from the latest commit.
+const buildmeta = async(version, option) => {
+    const metaMarker = '+';
+    const metaSeparator = '.';
+    const prefix = version.includes(metaMarker)
+        ? metaSeparator
+        : metaMarker;
+    const repoExists = await repo.exists(option);
 
+    let buildmeta = [option.prefix || 'NOREV'];
+    let dirty = true;
+    let hash;
+
+    if (repoExists) {
+        dirty = await repo.isDirty(option);
+        hash = await repo.hash(option);
+        buildmeta = [
+            option.prefix || 'SHA',
+            hash
+        ];
+    }
+
+    // If the working directory is dirty or not a valid repository,
+    // append the current username and current timestamp to the version
     if (dirty) {
         const name = await username();
         buildmeta.push(semverString(name));
         buildmeta.push(semverMoment());
     }
 
-    // Attach or append to "build data", as defined by semver.
-    return version + prefix + buildmeta.join(fieldSeparator);
+    // Append the semver compatible buildmeta to version
+    return version + prefix + buildmeta.join(metaSeparator);
 };
 
 const getRevision = async(option) => {
     const version = await pkgVersion(option);
-    const revision = await suffix(version, option);
+    const revision = await buildmeta(version, option);
 
     return revision;
 };
@@ -73,9 +81,8 @@ const getRevision = async(option) => {
 const version = async(o) => {
     const option = Object.assign({}, o);
     const cwd = path.resolve(option.cwd || '');
-    const revision = await getRevision(option);
 
-    return revision;
+    return await getRevision(option);
 };
 
 export default version;

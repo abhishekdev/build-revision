@@ -1,6 +1,8 @@
 # build-revision
 
-[![Build Status](https://travis-ci.org/abhishekdev/build-revision.svg?branch=master)](https://travis-ci.org/abhishekdev/build-revision) [![Coverage Status](https://coveralls.io/repos/github/abhishekdev/build-revision/badge.svg?branch=master)](https://coveralls.io/github/abhishekdev/build-revision?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/abhishekdev/build-revision/badge.svg)](https://coveralls.io/github/abhishekdev/build-revision)
+[![Build status](https://ci.appveyor.com/api/projects/status/87rwahlhtj1903ag?svg=true)](https://ci.appveyor.com/project/abhishekdev/build-revision)
+[![Build Status](https://travis-ci.org/abhishekdev/build-revision.svg)](https://travis-ci.org/abhishekdev/build-revision)
 
 Generate semver compatible version to uniquely identify project build using [build metadata](http://semver.org/#spec-item-10)
 
@@ -9,7 +11,11 @@ Generate semver compatible version to uniquely identify project build using [bui
 ### Install
 
 ```sh
+# OPTION: Use npm
 $ npm install --save-dev build-revision
+
+# OPTION: Use yarn
+$ yarn add build-revision --dev
 ```
 
 ### Example
@@ -37,10 +43,12 @@ const fn = aync() => {
 
 ## Results
 
+> If build metadata included in 'package.json' differs from that found by git. The SHA found by git is used.
+
 ### Working copy has no changes (_CI/CD Tools_)
 
 Version                | Build Version
----------------------- | ----------------------
+:--------------------- | :---------------------
 0.1.0                  | 0.1.0+SHA.abcd123
 0.1.0-pre              | 0.1.0-pre+SHA.abcd123
 0.1.0-pre+SHA.01234567 | 0.1.0-pre+SHA.01234567
@@ -48,18 +56,27 @@ Version                | Build Version
 ### Working copy has no changes (_Developer Machine_)
 
 Version                | Build Version
----------------------- | ---------------------------------------------------
+:--------------------- | :--------------------------------------------------
 0.1.0                  | 0.1.0+SHA.abcd123.currentuser.20170101T000000Z
 0.1.0-pre              | 0.1.0-pre+SHA.abcd123.currentuser.20170101T000000Z
 0.1.0-pre+SHA.01234567 | 0.1.0-pre+SHA.01234567.currentuser.20170101T000000Z
+
+### Working copy is _NOT_ a git clone
+
+Version   | Build Version
+:-------- | :-------------------------------------------
+0.1.0     | 0.1.0+NOREV.currentuser.20170101T000000Z
+0.1.0-pre | 0.1.0-pre+NOREV.currentuser.20170101T000000Z
 
 ## API
 
 ### buildRevision(options)
 
-- Appends `prefix.githash` to the version for a repo with no local changes
-- Appends `prefix.githash.username.timestamp` to the version for repo with local changes
-- The timestamp is a ISO 8601 UTC string
+- Appends `prefix.username.timestamp` to the version if repository does not exists
+- Appends `prefix.githash.username.timestamp` to the version for a git repository with local changes
+- Appends `prefix.githash` to the version for a git repository with no local changes
+
+> The timestamp is an ISO 8601 UTC string
 
 ```
 Type: Promise
