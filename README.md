@@ -11,7 +11,11 @@ Generate semver compatible version to uniquely identify project build using [bui
 ### Install
 
 ```sh
+# OPTION: Use npm
 $ npm install --save-dev build-revision
+
+# OPTION: Use yarn
+$ yarn add build-revision --dev
 ```
 
 ### Example
@@ -39,6 +43,8 @@ const fn = aync() => {
 
 ## Results
 
+> If build metadata included in 'package.json' differs from that found by git. The SHA found by git is used.
+
 ### Working copy has no changes (_CI/CD Tools_)
 
 Version                | Build Version
@@ -55,6 +61,13 @@ Version                | Build Version
 0.1.0-pre              | 0.1.0-pre+SHA.abcd123.currentuser.20170101T000000Z
 0.1.0-pre+SHA.01234567 | 0.1.0-pre+SHA.01234567.currentuser.20170101T000000Z
 
+### Working copy is _NOT_ a git clone
+
+Version   | Build Version
+:-------- | :-------------------------------------------
+0.1.0     | 0.1.0+NOREV.currentuser.20170101T000000Z
+0.1.0-pre | 0.1.0-pre+NOREV.currentuser.20170101T000000Z
+
 ## API
 
 ### buildRevision(options)
@@ -63,7 +76,7 @@ Version                | Build Version
 - Appends `prefix.githash.username.timestamp` to the version for a git repository with local changes
 - Appends `prefix.githash` to the version for a git repository with no local changes
 
->  The timestamp is a ISO 8601 UTC string
+> The timestamp is an ISO 8601 UTC string
 
 ```
 Type: Promise
