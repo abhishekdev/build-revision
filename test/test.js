@@ -34,7 +34,7 @@ test('buildinfo prefix is configurable', async t => {
     };
 
     const revision = await buildRevision(option);
-    t.truthy(semver.valid(revision) && revision.includes('+' + PREFIX), 'configured buildinfo prefix not set');
+    t.truthy(semver.valid(revision) && revision.includes(`+${PREFIX}`), 'configured buildinfo prefix not set');
 });
 
 test('updates the existing buildinfo fragment of semver', async t => {
@@ -82,7 +82,7 @@ test.serial('works when package is not a git repo', async t => {
 
     const revision = await buildRevision(option);
     const timestamp = revision.split('.').pop();
-    t.true(semver.valid(revision) && revision.includes('+' + PREFIX), 'could not parse default buildinfo prefix for un-versioned repo');
+    t.true(semver.valid(revision) && revision.includes(`+${PREFIX}`), 'could not parse default buildinfo prefix for un-versioned repo');
     t.true(moment(timestamp).isValid(), 'could not parse a valid timestamp');
 
     // Test Teardown: Re-instate .git directory
