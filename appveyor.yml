@@ -5,8 +5,8 @@ version: "{build}"
 environment:
   matrix:
     # node.js
-    - nodejs_version: "6"
-    - nodejs_version: "7"
+    - nodejs_version: "8"
+    - nodejs_version: "9"
 
 # End builds on first failure
 matrix:
