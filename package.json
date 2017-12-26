@@ -1,6 +1,6 @@
 {
   "name": "build-revision",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "Generate semver compatible version to uniquely identify project build using build metadata",
   "main": "index.js",
   "license": "MIT",
@@ -18,7 +18,8 @@
   "homepage": "https://github.com/abhishekdev/build-revision#readme",
   "scripts": {
     "build": "babel src -d dist --source-maps",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run build && npm run test",
     "test": "nyc --reporter=html --reporter=text ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
@@ -30,16 +31,16 @@
     "SHA"
   ],
   "dependencies": {
-    "moment": "^2.17.1",
-    "read-pkg-up": "^2.0.0",
+    "moment": "^2.20.1",
+    "read-pkg-up": "^3.0.0",
     "semver": "^5.3.0",
-    "username": "^2.3.0"
+    "username": "^3.0.0"
   },
   "devDependencies": {
-    "ava": "^0.18.1",
+    "ava": "^0.24.0",
     "babel-cli": "^6.22.2",
     "babel-preset-env": "^1.1.8",
-    "coveralls": "^2.11.15",
-    "nyc": "^10.1.2"
+    "coveralls": "^3.0.0",
+    "nyc": "^11.4.1"
   }
 }

@@ -20,7 +20,7 @@ $ yarn add build-revision --dev
 
 ### Example
 
-#### ES5
+#### ES2015
 
 ```javascript
 var buildRevision = require('build-revision');
@@ -30,7 +30,7 @@ buildRevision().then(function(version){
 });
 ```
 
-#### ES7
+#### ES2017+
 
 ```javascript
 import buildRevision from 'build-revision';
@@ -78,7 +78,7 @@ Version   | Build Version
 
 > The timestamp is an ISO 8601 UTC string
 
-```
+```yml
 Type: Promise
 Throws: Error
   - if the package version is not resolved
@@ -94,7 +94,7 @@ Returns:
 
 Build metadata Prefix
 
-```
+```yml
 Type: `String`
 Default: `SHA`
 ```
@@ -103,7 +103,7 @@ Default: `SHA`
 
 Search for the closest package.json starting from this directory
 
-```
+```yml
 Type: `String`
 Default: `.`
 ```
