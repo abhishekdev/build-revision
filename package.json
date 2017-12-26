@@ -18,6 +18,7 @@
   "homepage": "https://github.com/abhishekdev/build-revision#readme",
   "scripts": {
     "build": "babel src -d dist --source-maps",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build && npm run test",
     "test": "nyc --reporter=html --reporter=text ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
