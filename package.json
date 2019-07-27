@@ -31,16 +31,16 @@
     "SHA"
   ],
   "dependencies": {
-    "moment": "^2.23.0",
+    "moment": "^2.24.0",
     "read-pkg-up": "^4.0.0",
-    "semver": "^5.6.0",
-    "username": "^4.0.0"
+    "semver": "^5.7.0",
+    "username": "^4.1.0"
   },
   "devDependencies": {
-    "ava": "^1.0.1",
+    "ava": "^1.4.1",
     "babel-cli": "^6.22.2",
     "babel-preset-env": "^1.7.0",
-    "coveralls": "^3.0.2",
-    "nyc": "^13.1.0"
+    "coveralls": "^3.0.5",
+    "nyc": "^13.3.0"
   }
 }
