@@ -32,9 +32,9 @@
   ],
   "dependencies": {
     "moment": "^2.24.0",
-    "read-pkg-up": "^4.0.0",
-    "semver": "^5.7.0",
-    "username": "^4.1.0"
+    "read-pkg-up": "^6.0.0",
+    "semver": "^6.3.0",
+    "username": "^5.1.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
