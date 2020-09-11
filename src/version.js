@@ -29,8 +29,8 @@ const semverMoment = () => {
 // Read version key from the nearest package
 const pkgVersion = async(o) => {
     const data = await readPkgUp({cwd: o.cwd});
-    if (data && data.package && data.package.version) {
-        return semver.valid(data.package.version);
+    if (data && data.packageJson && data.packageJson.version) {
+        return semver.valid(data.packageJson.version);
     }
     throw new TypeError('Could not read a valid version from: ' + data.path
         ? path.relative('', data.path)
