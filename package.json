@@ -20,8 +20,16 @@
     "build": "babel src -d dist --source-maps",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build && npm run test",
+    "lint": "prettier --check \"src/**/*.js\" \"test/**/*.js\" index.js",
+    "pretest": "npm run lint",
     "test": "nyc --reporter=html --reporter=text ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint",
+      "pre-push": "npm run build && npm test"
+    }
   },
   "ava": {
     "babel": true
@@ -46,6 +54,9 @@
     "@babel/preset-env": "^7.11.5",
     "ava": "^3.12.1",
     "coveralls": "^3.1.0",
-    "nyc": "^15.1.0"
+    "husky": "^4.3.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.0.2"
   }
 }
