@@ -1,6 +1,6 @@
 {
   "name": "build-revision",
-  "version": "3.1.0",
+  "version": "4.0.0",
   "description": "Generate semver compatible version to uniquely identify project build using build metadata",
   "main": "index.js",
   "license": "MIT",
@@ -20,8 +20,19 @@
     "build": "babel src -d dist --source-maps",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build && npm run test",
+    "lint": "prettier --check \"src/**/*.js\" \"test/**/*.js\" index.js",
+    "pretest": "npm run lint",
     "test": "nyc --reporter=html --reporter=text ava",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged && npm run lint",
+      "pre-push": "npm run build && npm test"
+    }
+  },
+  "ava": {
+    "babel": true
   },
   "keywords": [
     "build",
@@ -32,16 +43,20 @@
   ],
   "dependencies": {
     "moment": "^2.28.0",
-    "read-pkg-up": "^6.0.0",
-    "semver": "^6.3.0",
+    "read-pkg-up": "^7.0.1",
+    "semver": "^7.3.2",
     "username": "^5.1.0"
   },
   "devDependencies": {
+    "@ava/babel": "^1.0.1",
     "@babel/cli": "^7.11.6",
     "@babel/core": "^7.11.6",
     "@babel/preset-env": "^7.11.5",
-    "ava": "^2.4.0",
+    "ava": "^3.12.1",
     "coveralls": "^3.1.0",
-    "nyc": "^14.1.1"
+    "husky": "^4.3.0",
+    "nyc": "^15.1.0",
+    "prettier": "^2.1.2",
+    "pretty-quick": "^3.0.2"
   }
 }

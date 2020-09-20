@@ -1,0 +1,18 @@
+# Ignore Git directory
+.git
+
+# Log files
+*.log
+npm-debug.log*
+
+# Dependencies, build results and intermediates
+node_modules/
+.nyc_output/
+coverage/
+*.tgz
+
+# DO NOT ignore the following to make docker-compose work
+# Ref: We cannot yet specify a '.dockerignore' file to `docker build`, https://github.com/moby/moby/issues/12886
+# CI machine starts from a clean checkout so these would not need to be ignored
+# dist/
+# tmp/

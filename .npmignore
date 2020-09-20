@@ -7,6 +7,13 @@ dist/*.map
 .babelrc
 .editorconfig
 .git*
+.dockerignore
+.travis.yml
+babel.config.js
+prettier.config.js
+appveyor.yml
+docker-compose.yml
+Dockerfile
 
 # IDE generated files and directories
 .project

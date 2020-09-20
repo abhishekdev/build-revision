@@ -27,23 +27,23 @@ const semverMoment = () => {
 };
 
 // Read version key from the nearest package
-const pkgVersion = async(o) => {
-    const data = await readPkgUp({cwd: o.cwd});
-    if (data && data.package && data.package.version) {
-        return semver.valid(data.package.version);
+const pkgVersion = async (o) => {
+    const data = await readPkgUp({ cwd: o.cwd });
+    if (data && data.packageJson && data.packageJson.version) {
+        return semver.valid(data.packageJson.version);
     }
-    throw new TypeError('Could not read a valid version from: ' + data.path
-        ? path.relative('', data.path)
-        : 'package.json');
+    throw new TypeError(
+        'Could not read a valid version from: ' + data.path
+            ? path.relative('', data.path)
+            : 'package.json'
+    );
 };
 
 // Identify dirty builds, those that differ from the latest commit.
-const buildmeta = async(version, option) => {
+const buildmeta = async (version, option) => {
     const metaMarker = '+';
     const metaSeparator = '.';
-    const prefix = version.includes(metaMarker)
-        ? metaSeparator
-        : metaMarker;
+    const prefix = version.includes(metaMarker) ? metaSeparator : metaMarker;
     const repoExists = await repo.exists(option);
 
     let buildmeta = [option.prefix || 'NOREV'];
@@ -53,10 +53,7 @@ const buildmeta = async(version, option) => {
     if (repoExists) {
         dirty = await repo.isDirty(option);
         hash = await repo.hash(option);
-        buildmeta = [
-            option.prefix || 'SHA',
-            hash
-        ];
+        buildmeta = [option.prefix || 'SHA', hash];
     }
 
     // If the working directory is dirty or not a valid repository,
@@ -71,14 +68,14 @@ const buildmeta = async(version, option) => {
     return version + prefix + buildmeta.join(metaSeparator);
 };
 
-const getRevision = async(option) => {
+const getRevision = async (option) => {
     const version = await pkgVersion(option);
     const revision = await buildmeta(version, option);
 
     return revision;
 };
 
-const version = async(o) => {
+const version = async (o) => {
     const option = Object.assign({}, o);
     const cwd = path.resolve(option.cwd || '');
 
