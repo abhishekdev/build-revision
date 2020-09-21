@@ -1,0 +1,17 @@
+version: '3.7'
+
+# Run: docker-compose up
+
+volumes:
+  node_modules:
+
+services:
+  # UI Docs and Styleguide
+  ci:
+    build:
+      context: .
+      target: bundle
+    entrypoint: bash -c "npm run test && npm run build"
+    volumes:
+      - ./:/project
+      - node_modules:/project/node_modules
