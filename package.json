@@ -1,6 +1,6 @@
 {
   "name": "build-revision",
-  "version": "4.0.0",
+  "version": "4.1.0-pre",
   "description": "Generate semver compatible version to uniquely identify project build using build metadata",
   "main": "index.js",
   "license": "MIT",
