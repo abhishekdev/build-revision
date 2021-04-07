@@ -1,9 +1,17 @@
 import fs from 'fs';
 import test from 'ava';
 import semver from 'semver';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 import buildRevision from '../index';
+
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
+// Expect ISO 8601 compatible format which has no separators for semver compatibility
+const TIMESTAMP_FORMAT = 'YYYYMMDD[T]HHmmss[Z]';
 
 test('build revision is semver compatible', async (t) => {
     const option = { cwd: 'test/fixture/package-valid/target' };
@@ -69,7 +77,10 @@ test('generates ISO 8601 UTC timestamp for dirty builds', async (t) => {
 
     const revision = await buildRevision(option);
     const timestamp = revision.split('.').pop();
-    t.true(moment(timestamp).isValid(), 'could not parse a valid timestamp');
+    t.true(
+        dayjs.utc(timestamp, TIMESTAMP_FORMAT).isValid(),
+        'could not parse a valid timestamp'
+    );
 
     // Test Teardown: Reset repository
     fs.unlink('test/fixture/package-valid/change.txt', (err) => {
@@ -97,7 +108,10 @@ test.serial('works when package is not a git repo', async (t) => {
         semver.valid(revision) && revision.includes(`+${PREFIX}`),
         'could not parse default buildinfo prefix for un-versioned repo'
     );
-    t.true(moment(timestamp).isValid(), 'could not parse a valid timestamp');
+    t.true(
+        dayjs.utc(timestamp, TIMESTAMP_FORMAT).isValid(),
+        'could not parse a valid timestamp'
+    );
 
     // Test Teardown: Re-instate .git directory
     if (fs.existsSync('backup.git')) {
