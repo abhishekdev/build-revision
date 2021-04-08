@@ -9,6 +9,7 @@ dist/*.map
 .git*
 .dockerignore
 .travis.yml
+.husky
 babel.config.js
 prettier.config.js
 appveyor.yml
