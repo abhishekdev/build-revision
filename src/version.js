@@ -1,7 +1,7 @@
 'use strict';
 
 import path from 'path';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import semver from 'semver';
 import username from 'username';
 import readPkgUp from 'read-pkg-up';
@@ -20,7 +20,7 @@ const semverString = (str) => {
 // e.g. 2017-Jan-01, 15:00:01.100 => "20170130T1500Z"
 const semverMoment = () => {
     // Get ISO date after ignoring the millisecond precision
-    const isoDate = moment().milliseconds(0).toISOString();
+    const isoDate = dayjs().millisecond(0).toISOString();
 
     // Replace millisecond information as the 'dot' notation for it is incompatible with semver
     return semverString(isoDate.replace(REGEX_ISODATE_MILLISECONDS, ''));
