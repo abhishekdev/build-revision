@@ -38,7 +38,7 @@
     "SHA"
   ],
   "dependencies": {
-    "moment": "^2.29.1",
+    "dayjs": "^1.10.4",
     "read-pkg-up": "^7.0.1",
     "semver": "^7.3.5",
     "username": "^5.1.0"
