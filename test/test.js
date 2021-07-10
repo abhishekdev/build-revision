@@ -53,8 +53,8 @@ test('updates the existing buildinfo fragment of semver', async (t) => {
     const option = {
         cwd: 'test/fixture/package-with-buildinfo/target',
     };
-    const fixtureVersion = require('./fixture/package-with-buildinfo/package.json')
-        .version;
+    const fixtureVersion =
+        require('./fixture/package-with-buildinfo/package.json').version;
 
     t.true(
         (fixtureVersion.match(/\+/g) || []).length === 1,
