@@ -38,7 +38,7 @@
     "SHA"
   ],
   "dependencies": {
-    "dayjs": "^1.10.5",
+    "dayjs": "^1.10.6",
     "read-pkg-up": "^7.0.1",
     "semver": "^7.3.5",
     "username": "^5.1.0"
@@ -50,7 +50,7 @@
     "@babel/preset-env": "^7.14.7",
     "ava": "^3.15.0",
     "coveralls": "^3.1.1",
-    "husky": "^7.0.0",
+    "husky": "^7.0.1",
     "nyc": "^15.1.0",
     "prettier": "^2.3.2",
     "pretty-quick": "^3.1.1"
